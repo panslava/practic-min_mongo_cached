@@ -1,0 +1,22 @@
+version: "3"
+services:
+  python_server:
+    build: .
+    ports:
+      - "65432:65432"
+    depends_on:
+      - redis
+      - mongo
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
